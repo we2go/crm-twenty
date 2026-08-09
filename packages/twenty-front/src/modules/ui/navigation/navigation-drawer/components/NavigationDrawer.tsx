@@ -121,7 +121,7 @@ export const NavigationDrawer = ({
         isResizing={isResizing}
       >
         <StyledContainer isExpanded={isExpanded}>
-          {!isMobile && isSettingsDrawer && title ? (
+          {isSettingsDrawer && title ? (
             <NavigationDrawerBackButton title={title} />
           ) : (
             <NavigationDrawerHeader showCollapseButton />

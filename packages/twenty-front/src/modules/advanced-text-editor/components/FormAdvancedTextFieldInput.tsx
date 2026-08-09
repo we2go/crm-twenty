@@ -207,7 +207,6 @@ export const FormAdvancedTextFieldInput = ({
   const { renderFullScreenModal } = useFullScreenModal({
     links: breadcrumbLinks,
     onClose: handleExitFullScreen,
-    hasClosePageButton: !isMobile,
   });
 
   if (!isDefined(editor)) {

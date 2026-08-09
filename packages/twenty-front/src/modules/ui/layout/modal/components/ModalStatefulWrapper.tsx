@@ -53,6 +53,8 @@ export const ModalStatefulWrapper = ({
     }
   };
 
+  const effectiveIsClosable = isMobile || isClosable;
+
   return (
     <ModalComponentInstanceContext.Provider
       value={{ instanceId: modalInstanceId }}
@@ -67,7 +69,7 @@ export const ModalStatefulWrapper = ({
             modalInstanceId={modalInstanceId}
             modalRef={modalRef}
             onEnter={onEnter}
-            isClosable={isClosable}
+            isClosable={effectiveIsClosable}
             onClose={handleClose}
           />
         )}

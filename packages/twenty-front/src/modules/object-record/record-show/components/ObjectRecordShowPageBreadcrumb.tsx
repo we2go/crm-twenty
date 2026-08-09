@@ -15,6 +15,7 @@ import { useIsMobile } from '@/ui/utilities/responsive/hooks/useIsMobile';
 import { styled } from '@linaria/react';
 import { useState } from 'react';
 import { FieldMetadataType } from 'twenty-shared/types';
+import { IconChevronLeft } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
 const StyledEditableTitleContainer = styled.div`
@@ -48,6 +49,26 @@ const StyledTitle = styled.div`
 
 const StyledPaginationInformation = styled.span`
   color: ${themeCssVariables.font.color.tertiary};
+`;
+
+const StyledMobileBackButton = styled.button`
+  align-items: center;
+  background: inherit;
+  border: 1px solid transparent;
+  border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
+  color: ${themeCssVariables.font.color.tertiary};
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: ${themeCssVariables.spacing[1]};
+  height: ${themeCssVariables.spacing[7]};
+  padding: 2px ${themeCssVariables.spacing[1]} 2px 2px;
+  width: fit-content;
+
+  &:hover {
+    background: ${themeCssVariables.background.transparent.light};
+  }
 `;
 
 export const ObjectRecordShowPageBreadcrumb = ({
@@ -117,6 +138,19 @@ export const ObjectRecordShowPageBreadcrumb = ({
 
   return (
     <StyledEditableTitleContainer data-testid="top-bar-title">
+      {isMobile && (
+        <StyledMobileBackButton
+          onClick={() => {
+            navigateToIndexView();
+          }}
+        >
+          <IconChevronLeft
+            size={themeCssVariables.icon.size.md}
+            stroke={themeCssVariables.icon.stroke.sm}
+          />
+          <span>{objectLabel}</span>
+        </StyledMobileBackButton>
+      )}
       {!isMobile && (
         <StyledEditableTitlePrefix
           onClick={() => {

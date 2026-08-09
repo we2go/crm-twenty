@@ -46,7 +46,7 @@ export const FullScreenContainer = ({
       <StyledPageHeaderContainer>
         <PageHeader
           title={<Breadcrumb links={links} />}
-          hasClosePageButton={!isMobile}
+          hasClosePageButton
           onClosePage={exitFullScreen}
         />
       </StyledPageHeaderContainer>

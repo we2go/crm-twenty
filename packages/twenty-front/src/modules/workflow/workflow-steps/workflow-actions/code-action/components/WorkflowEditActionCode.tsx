@@ -327,7 +327,6 @@ export const WorkflowEditActionCode = ({
     useFullScreenModal({
       links: breadcrumbLinks,
       onClose: () => setIsFullScreen(false),
-      hasClosePageButton: !isMobile,
     });
 
   useListenClickOutside({
