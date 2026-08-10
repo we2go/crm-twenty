@@ -14,6 +14,7 @@ import { GlobalWorkspaceOrmManager } from 'src/engine/twenty-orm/global-workspac
 import { buildSystemAuthContext } from 'src/engine/twenty-orm/utils/build-system-auth-context.util';
 import { WorkspaceEventBatch } from 'src/engine/workspace-event-emitter/types/workspace-event-batch.type';
 import { parseEventNameOrThrow } from 'src/engine/workspace-event-emitter/utils/parse-event-name';
+import { AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 import { NoteWorkspaceEntity } from 'src/modules/note/standard-objects/note.workspace-entity';
 import { TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
 import { TimelineActivityRepository } from 'src/modules/timeline/repositories/timeline-activity.repository';
@@ -205,6 +206,17 @@ export class TimelineActivityService {
           properties: event.properties,
         })) satisfies TimelineActivityPayload[]),
       ];
+    }
+
+    if (objectSingularName === 'attachment') {
+      // Attachments have no timeline activity of their own (no targetAttachment
+      // column), so only emit the linked activities on the target record.
+      return await this.computeTimelineActivityPayloadsForAttachments({
+        events: events as ObjectRecordBaseEvent<AttachmentWorkspaceEntity>[],
+        workspaceId,
+        objectMetadata,
+        name,
+      });
     }
 
     if (
@@ -431,6 +443,52 @@ export class TimelineActivityService {
           linkedObjectMetadataId: activityObjectMetadataId,
           workspaceMemberId: event.workspaceMemberId,
           properties: {},
+        } satisfies TimelineActivityPayload;
+      })
+      .filter(isDefined);
+  }
+
+  private async computeTimelineActivityPayloadsForAttachments({
+    events,
+    name,
+    workspaceId,
+    objectMetadata,
+  }: WorkspaceEventBatch<
+    ObjectRecordBaseEvent<AttachmentWorkspaceEntity>
+  >): Promise<TimelineActivityPayload[]> {
+    const { action } = parseEventNameOrThrow(name);
+
+    return events
+      .map((event) => {
+        const record = (action === 'deleted'
+          ? event.properties.before
+          : event.properties.after) as ObjectRecord | undefined;
+
+        if (!isDefined(record)) {
+          return;
+        }
+
+        const targetColumnName = Object.entries(record).find(
+          ([columnName, columnValue]: [string, string]) =>
+            columnName.startsWith('target') &&
+            columnName.endsWith('Id') &&
+            columnValue !== null,
+        )?.[0];
+
+        if (!isDefined(targetColumnName)) {
+          return;
+        }
+
+        return {
+          name: `linked-attachment.${action}`,
+          objectSingularName:
+            extractObjectSingularNameFromTargetColumnName(targetColumnName),
+          recordId: record[targetColumnName],
+          linkedRecordCachedName: record.name ?? record.file?.[0]?.label ?? '',
+          linkedRecordId: event.recordId,
+          linkedObjectMetadataId: objectMetadata.id,
+          workspaceMemberId: event.workspaceMemberId,
+          properties: event.properties,
         } satisfies TimelineActivityPayload;
       })
       .filter(isDefined);
