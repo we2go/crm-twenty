@@ -1,9 +1,9 @@
 import {
-    PageLayoutTabLayoutMode,
-    type GridPosition,
-    type PageLayoutWidgetConditionalDisplay,
-    type PageLayoutWidgetGridPosition,
-    type PageLayoutWidgetVerticalListPosition,
+  PageLayoutTabLayoutMode,
+  type GridPosition,
+  type PageLayoutWidgetConditionalDisplay,
+  type PageLayoutWidgetGridPosition,
+  type PageLayoutWidgetVerticalListPosition,
 } from 'twenty-shared/types';
 
 import { WidgetType } from 'src/engine/metadata-modules/page-layout-widget/enums/widget-type.enum';
@@ -133,12 +133,6 @@ export const TAB_PROPS = {
     icon: 'IconCalendarEvent',
     layoutMode: PageLayoutTabLayoutMode.VERTICAL_LIST,
   },
-  researchPack: {
-    title: 'Research Pack',
-    position: 45,
-    icon: 'IconPuzzle',
-    layoutMode: PageLayoutTabLayoutMode.VERTICAL_LIST,
-  },
   note: {
     title: 'Note',
     position: 15,
@@ -205,12 +199,6 @@ export const WIDGET_PROPS = {
   calendar: {
     title: 'Calendar',
     type: WidgetType.CALENDAR,
-    gridPosition: GRID_POSITIONS.HALF_HEIGHT,
-    position: VERTICAL_LIST_LAYOUT_POSITIONS.FIRST,
-  },
-  researchPack: {
-    title: 'Research Pack',
-    type: WidgetType.RESEARCH_PACK,
     gridPosition: GRID_POSITIONS.HALF_HEIGHT,
     position: VERTICAL_LIST_LAYOUT_POSITIONS.FIRST,
   },

@@ -101,14 +101,6 @@ export const STANDARD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIERS = {
           },
         },
       },
-      researchPack: {
-        universalIdentifier: '20202020-ab01-4001-8001-c0aba11c0108',
-        widgets: {
-          researchPack: {
-            universalIdentifier: '20202020-ac01-4001-8001-c0aba11c0181',
-          },
-        },
-      },
     },
   },
   personRecordPage: {
@@ -179,14 +171,6 @@ export const STANDARD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIERS = {
           },
         },
       },
-      researchPack: {
-        universalIdentifier: '20202020-ab02-4002-8002-ae0a1ea11208',
-        widgets: {
-          researchPack: {
-            universalIdentifier: '20202020-ac02-4002-8002-ae0a1ea11281',
-          },
-        },
-      },
     },
   },
   opportunityRecordPage: {
@@ -254,14 +238,6 @@ export const STANDARD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIERS = {
         widgets: {
           calendar: {
             universalIdentifier: '20202020-ac03-4003-8003-0aa0b1ca1371',
-          },
-        },
-      },
-      researchPack: {
-        universalIdentifier: '20202020-ab03-4003-8003-0aa0b1ca1308',
-        widgets: {
-          researchPack: {
-            universalIdentifier: '20202020-ac03-4003-8003-0aa0b1ca1381',
           },
         },
       },
