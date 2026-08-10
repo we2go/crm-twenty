@@ -67,6 +67,16 @@ Roughly +60 lines across two files, purely additive:
   `linked-attachment.created` entries in the company timeline, and both files render in
   the Files widget (standard).
 
+### Screenshot (end-to-end verification)
+
+Timeline tab of a company record after uploading two research-pack files:
+
+![Attachments in the record timeline](assets/timeline-attachments.png)
+
+Both files (`Research Pack 1: SBC Summit`, `Research Pack 2: SBC Summit`) appear in the
+timeline as "linked attachment" entries (`linked-attachment.created`), and the same two
+files are visible in the standard **Files** widget of the record.
+
 ### Open questions for maintainers
 
 - Should **all** attachments go to the timeline, or only a subset (e.g., by field /
