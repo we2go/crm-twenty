@@ -5115,11 +5115,6 @@ export type RemoveQueryFromEventStreamInput = {
   queryId: Scalars['String']['input'];
 };
 
-export type ResearchPackConfiguration = {
-  __typename?: 'ResearchPackConfiguration';
-  configurationType: WidgetConfigurationType;
-};
-
 export type ResendEmailVerificationToken = {
   __typename?: 'ResendEmailVerificationToken';
   success: Scalars['Boolean']['output'];
@@ -6518,7 +6513,7 @@ export type Webhook = {
   updatedAt: Scalars['DateTime']['output'];
 };
 
-export type WidgetConfiguration = AggregateChartConfiguration | BarChartConfiguration | CalendarConfiguration | CallRecordingSummaryConfiguration | CallRecordingTranscriptConfiguration | EmailThreadConfiguration | EmailsConfiguration | FieldConfiguration | FieldRichTextConfiguration | FieldsConfiguration | FilesConfiguration | FrontComponentConfiguration | IframeConfiguration | LineChartConfiguration | MessageCampaignBodyConfiguration | MessageCampaignDetailsConfiguration | NotesConfiguration | PieChartConfiguration | RecordTableConfiguration | ResearchPackConfiguration | StandaloneRichTextConfiguration | TasksConfiguration | TimelineConfiguration | ViewConfiguration | WorkflowConfiguration | WorkflowRunConfiguration | WorkflowVersionConfiguration;
+export type WidgetConfiguration = AggregateChartConfiguration | BarChartConfiguration | CalendarConfiguration | CallRecordingSummaryConfiguration | CallRecordingTranscriptConfiguration | EmailThreadConfiguration | EmailsConfiguration | FieldConfiguration | FieldRichTextConfiguration | FieldsConfiguration | FilesConfiguration | FrontComponentConfiguration | IframeConfiguration | LineChartConfiguration | MessageCampaignBodyConfiguration | MessageCampaignDetailsConfiguration | NotesConfiguration | PieChartConfiguration | RecordTableConfiguration | StandaloneRichTextConfiguration | TasksConfiguration | TimelineConfiguration | ViewConfiguration | WorkflowConfiguration | WorkflowRunConfiguration | WorkflowVersionConfiguration;
 
 export enum WidgetConfigurationType {
   AGGREGATE_CHART = 'AGGREGATE_CHART',
@@ -6540,7 +6535,6 @@ export enum WidgetConfigurationType {
   NOTES = 'NOTES',
   PIE_CHART = 'PIE_CHART',
   RECORD_TABLE = 'RECORD_TABLE',
-  RESEARCH_PACK = 'RESEARCH_PACK',
   STANDALONE_RICH_TEXT = 'STANDALONE_RICH_TEXT',
   TASKS = 'TASKS',
   TIMELINE = 'TIMELINE',
@@ -7421,7 +7415,6 @@ export type PageLayoutFragmentFragment = { __typename?: 'PageLayout', id: string
         | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
         | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
         | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-        | { __typename?: 'ResearchPackConfiguration' }
         | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
         | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
         | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -7455,7 +7448,6 @@ export type PageLayoutTabFragmentFragment = { __typename?: 'PageLayoutTab', id: 
       | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
       | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
       | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-      | { __typename?: 'ResearchPackConfiguration' }
       | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
       | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
       | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -7501,7 +7493,6 @@ export type FindOnePageLayoutQuery = { __typename?: 'Query', getPageLayout?: { _
           | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
           | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-          | { __typename?: 'ResearchPackConfiguration' }
           | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
           | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -7879,7 +7870,6 @@ export type PageLayoutWidgetFragmentFragment = { __typename?: 'PageLayoutWidget'
     | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
     | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
     | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-    | { __typename?: 'ResearchPackConfiguration' }
     | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
     | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
     | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -7918,7 +7908,6 @@ export type ResetPageLayoutTabToDefaultMutation = { __typename?: 'Mutation', res
         | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
         | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
         | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-        | { __typename?: 'ResearchPackConfiguration' }
         | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
         | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
         | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -7957,7 +7946,6 @@ export type ResetPageLayoutToDefaultMutation = { __typename?: 'Mutation', resetP
           | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
           | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-          | { __typename?: 'ResearchPackConfiguration' }
           | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
           | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -7996,7 +7984,6 @@ export type ResetPageLayoutWidgetToDefaultMutation = { __typename?: 'Mutation', 
       | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
       | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
       | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-      | { __typename?: 'ResearchPackConfiguration' }
       | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
       | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
       | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -8036,7 +8023,6 @@ export type UpdatePageLayoutWithTabsAndWidgetsMutation = { __typename?: 'Mutatio
           | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
           | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-          | { __typename?: 'ResearchPackConfiguration' }
           | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
           | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -8087,7 +8073,6 @@ export type FindAllPageLayoutsQuery = { __typename?: 'Query', getPageLayouts: Ar
           | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
           | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-          | { __typename?: 'ResearchPackConfiguration' }
           | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
           | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }
@@ -8124,7 +8109,6 @@ export type FindAllRecordPageLayoutsQuery = { __typename?: 'Query', getPageLayou
           | { __typename?: 'NotesConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'PieChartConfiguration', configurationType: WidgetConfigurationType, groupByFieldMetadataId: string, aggregateFieldMetadataId: string, aggregateOperation: AggregateOperations, groupBySubFieldName?: string | null, dateGranularity?: ObjectRecordGroupByDateGranularity | null, orderBy?: GraphOrderBy | null, manualSortOrder?: Array<string> | null, displayDataLabel?: boolean | null, showCenterMetric?: boolean | null, displayLegend?: boolean | null, numberFormat?: ChartNumberFormat | null, hideEmptyCategory?: boolean | null, splitMultiValueFields?: boolean | null, color?: string | null, description?: string | null, filter?: any | null, timezone?: string | null, firstDayOfTheWeek?: number | null }
           | { __typename?: 'RecordTableConfiguration', configurationType: WidgetConfigurationType, viewId?: string | null }
-          | { __typename?: 'ResearchPackConfiguration' }
           | { __typename?: 'StandaloneRichTextConfiguration', configurationType: WidgetConfigurationType, body: { __typename?: 'RichTextBody', blocknote?: string | null, markdown?: string | null } }
           | { __typename?: 'TasksConfiguration', configurationType: WidgetConfigurationType }
           | { __typename?: 'TimelineConfiguration', configurationType: WidgetConfigurationType }

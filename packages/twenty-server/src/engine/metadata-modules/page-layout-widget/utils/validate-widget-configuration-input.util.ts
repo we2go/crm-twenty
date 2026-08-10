@@ -187,11 +187,6 @@ export const validateWidgetConfigurationInput = ({
         'Notes configuration is not supported yet',
         PageLayoutWidgetExceptionCode.INVALID_PAGE_LAYOUT_WIDGET_DATA,
       );
-    case WidgetConfigurationType.RESEARCH_PACK:
-      throw new PageLayoutWidgetException(
-        'Research Pack configuration is not supported yet',
-        PageLayoutWidgetExceptionCode.INVALID_PAGE_LAYOUT_WIDGET_DATA,
-      );
     case WidgetConfigurationType.FILES:
       throw new PageLayoutWidgetException(
         'Files configuration is not supported yet',
