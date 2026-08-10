@@ -14,9 +14,9 @@ import { type AllStandardObjectName } from 'src/engine/workspace-manager/twenty-
 import { type StandardRecordPageLayoutConfig } from 'src/engine/workspace-manager/twenty-standard-application/utils/page-layout-config/standard-page-layout-config.type';
 import { computeMyFirstDashboardWidgets } from 'src/engine/workspace-manager/twenty-standard-application/utils/page-layout-widget/compute-my-first-dashboard-widgets.util';
 import {
-  type CreateStandardPageLayoutWidgetArgs,
-  type CreateStandardPageLayoutWidgetContext,
-  createStandardPageLayoutWidgetFlatMetadata,
+    type CreateStandardPageLayoutWidgetArgs,
+    type CreateStandardPageLayoutWidgetContext,
+    createStandardPageLayoutWidgetFlatMetadata,
 } from 'src/engine/workspace-manager/twenty-standard-application/utils/page-layout-widget/create-standard-page-layout-widget-flat-metadata.util';
 import { findObjectNameByUniversalIdentifier } from 'src/engine/workspace-manager/twenty-standard-application/utils/page-layout/create-standard-page-layout-flat-metadata.util';
 
@@ -32,6 +32,7 @@ const RECORD_PAGE_LAYOUT_WIDGET_TYPES = [
   WidgetType.TIMELINE,
   WidgetType.TASKS,
   WidgetType.NOTES,
+  WidgetType.RESEARCH_PACK,
   WidgetType.FILES,
   WidgetType.EMAILS,
   WidgetType.CALENDAR,
@@ -55,6 +56,7 @@ const WIDGET_TYPE_TO_CONFIGURATION_TYPE: Partial<
   [WidgetType.TIMELINE]: WidgetConfigurationType.TIMELINE,
   [WidgetType.TASKS]: WidgetConfigurationType.TASKS,
   [WidgetType.NOTES]: WidgetConfigurationType.NOTES,
+  [WidgetType.RESEARCH_PACK]: WidgetConfigurationType.RESEARCH_PACK,
   [WidgetType.FILES]: WidgetConfigurationType.FILES,
   [WidgetType.EMAILS]: WidgetConfigurationType.EMAILS,
   [WidgetType.CALENDAR]: WidgetConfigurationType.CALENDAR,

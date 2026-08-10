@@ -7,6 +7,7 @@ import { WidgetType } from '~/generated-metadata/graphql';
 export const WIDGET_TYPES_REQUIRING_RELATION_FIELD: WidgetType[] = [
   WidgetType.TASKS,
   WidgetType.NOTES,
+  WidgetType.RESEARCH_PACK,
   WidgetType.FILES,
   WidgetType.TIMELINE,
 ];

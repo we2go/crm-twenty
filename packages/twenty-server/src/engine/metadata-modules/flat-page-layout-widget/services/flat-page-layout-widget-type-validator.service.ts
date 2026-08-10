@@ -4,8 +4,8 @@ import { msg } from '@lingui/core/macro';
 import { isDefined } from 'twenty-shared/utils';
 
 import {
-  type FlatPageLayoutWidgetTypeValidatorForCreation,
-  type FlatPageLayoutWidgetTypeValidatorForUpdate,
+    type FlatPageLayoutWidgetTypeValidatorForCreation,
+    type FlatPageLayoutWidgetTypeValidatorForUpdate,
 } from 'src/engine/metadata-modules/flat-page-layout-widget/types/flat-page-layout-widget-type-validator.type';
 import { type FlatPageLayoutWidgetValidationError } from 'src/engine/metadata-modules/flat-page-layout-widget/types/flat-page-layout-widget-validation-error.type';
 import { rejectWidgetType } from 'src/engine/metadata-modules/flat-page-layout-widget/validators/utils/reject-widget-type.util';
@@ -107,6 +107,9 @@ export class FlatPageLayoutWidgetTypeValidatorService {
       MESSAGE_CAMPAIGN_DETAILS: validateSimpleRecordPageWidgetForCreation(
         WidgetConfigurationType.MESSAGE_CAMPAIGN_DETAILS,
       ),
+      RESEARCH_PACK: validateSimpleRecordPageWidgetForCreation(
+        WidgetConfigurationType.RESEARCH_PACK,
+      ),
     };
 
   private readonly PAGE_LAYOUT_WIDGET_TYPE_VALIDATOR_FOR_UPDATE_HASHMAP: FlatPageLayoutWidgetTypeValidatorForUpdate =
@@ -172,6 +175,9 @@ export class FlatPageLayoutWidgetTypeValidatorService {
       ),
       MESSAGE_CAMPAIGN_DETAILS: validateSimpleRecordPageWidgetForUpdate(
         WidgetConfigurationType.MESSAGE_CAMPAIGN_DETAILS,
+      ),
+      RESEARCH_PACK: validateSimpleRecordPageWidgetForUpdate(
+        WidgetConfigurationType.RESEARCH_PACK,
       ),
     };
 

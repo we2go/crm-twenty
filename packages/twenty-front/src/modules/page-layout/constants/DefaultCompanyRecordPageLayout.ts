@@ -1,10 +1,10 @@
 import { DEFAULT_COMPANY_RECORD_PAGE_LAYOUT_ID } from '@/page-layout/constants/DefaultCompanyRecordPageLayoutId';
 import { type PageLayout } from '@/page-layout/types/PageLayout';
 import {
-  PageLayoutTabLayoutMode,
-  PageLayoutType,
-  WidgetConfigurationType,
-  WidgetType,
+    PageLayoutTabLayoutMode,
+    PageLayoutType,
+    WidgetConfigurationType,
+    WidgetType,
 } from '~/generated-metadata/graphql';
 
 export const DEFAULT_COMPANY_RECORD_PAGE_LAYOUT: PageLayout = {
@@ -132,6 +132,52 @@ export const DEFAULT_COMPANY_RECORD_PAGE_LAYOUT: PageLayout = {
           pageLayoutTabId: 'company-tab-tasks',
           title: 'Tasks',
           type: WidgetType.TASKS,
+          objectMetadataId: null,
+          gridPosition: {
+            __typename: 'GridPosition',
+            row: 0,
+            column: 0,
+            rowSpan: 6,
+            columnSpan: 12,
+          },
+          position: {
+            __typename: 'PageLayoutWidgetVerticalListPosition',
+            layoutMode: PageLayoutTabLayoutMode.VERTICAL_LIST,
+            index: 0,
+          },
+          configuration: {
+            __typename: 'FieldsConfiguration',
+            configurationType: WidgetConfigurationType.FIELDS,
+            viewId: null,
+          },
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          deletedAt: null,
+        },
+      ],
+    },
+    {
+      __typename: 'PageLayoutTab',
+      applicationId: '',
+      id: 'company-tab-research-pack',
+      isActive: true,
+      title: 'Research Pack',
+      icon: 'IconPuzzle',
+      position: 350,
+      layoutMode: PageLayoutTabLayoutMode.VERTICAL_LIST,
+      pageLayoutId: DEFAULT_COMPANY_RECORD_PAGE_LAYOUT_ID,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      deletedAt: null,
+      widgets: [
+        {
+          __typename: 'PageLayoutWidget',
+          applicationId: '',
+          id: 'company-widget-research-pack',
+          isActive: true,
+          pageLayoutTabId: 'company-tab-research-pack',
+          title: 'Research Pack',
+          type: WidgetType.RESEARCH_PACK,
           objectMetadataId: null,
           gridPosition: {
             __typename: 'GridPosition',
