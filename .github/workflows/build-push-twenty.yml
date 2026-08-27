@@ -95,7 +95,21 @@ jobs:
             docker compose -f twenty/docker-compose.yml pull
             docker compose -f twenty/docker-compose.yml up -d
 
-            sleep 15
             docker compose -f twenty/docker-compose.yml ps twenty-server twenty-worker twenty-db twenty-redis
-            curl -sf https://crm.smokky.club/healthz || { echo "Health check FAILED"; exit 1; }
+
+            # Ждём healthz: на первом старте после апгрейда миграции БД могут
+            # занимать несколько минут (start_period в compose = 300s).
+            echo "Waiting for https://crm.smokky.club/healthz ..."
+            for i in $(seq 1 40); do
+              if curl -sf https://crm.smokky.club/healthz >/dev/null; then
+                echo "Health check OK after ${i}x15s"
+                break
+              fi
+              if [ "$i" -eq 40 ]; then
+                echo "Health check FAILED"
+                docker compose -f twenty/docker-compose.yml logs --tail=100 twenty-server
+                exit 1
+              fi
+              sleep 15
+            done
             echo "=== Deploy complete ==="
