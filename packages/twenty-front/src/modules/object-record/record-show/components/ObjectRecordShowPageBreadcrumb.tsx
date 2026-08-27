@@ -21,6 +21,7 @@ import { useState } from 'react';
 import { FieldMetadataType } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
 import { Avatar } from 'twenty-ui/data-display';
+import { IconChevronLeft } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { getAbsoluteImageUrl } from '~/utils/image/getAbsoluteImageUrl';
 
@@ -30,6 +31,26 @@ const StyledEditableTitleContainer = styled.div`
   flex-direction: row;
   overflow-x: hidden;
   width: 100%;
+`;
+
+const StyledMobileBackButton = styled.button`
+  align-items: center;
+  background: inherit;
+  border: 1px solid transparent;
+  border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
+  color: ${themeCssVariables.font.color.tertiary};
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: ${themeCssVariables.spacing[1]};
+  height: ${themeCssVariables.spacing[7]};
+  padding: 2px ${themeCssVariables.spacing[1]} 2px 2px;
+  width: fit-content;
+
+  &:hover {
+    background: ${themeCssVariables.background.transparent.light};
+  }
 `;
 
 const StyledEditableTitlePrefix = styled.div`
@@ -152,17 +173,29 @@ export const ObjectRecordShowPageBreadcrumb = ({
   return (
     <StyledEditableTitleContainer data-testid="top-bar-title">
       {isMobile ? (
-        isDefined(recordIdentifier) && (
-          <StyledAvatarContainer>
-            <Avatar
-              avatarUrl={getAbsoluteImageUrl(recordIdentifier.avatarUrl)}
-              placeholder={recordIdentifier.name}
-              placeholderColorSeed={objectRecordId}
-              size="md"
-              type={recordIdentifier.avatarType}
+        <>
+          <StyledMobileBackButton
+            onClick={() => {
+              navigateToIndexView();
+            }}
+          >
+            <IconChevronLeft
+              size={themeCssVariables.icon.size.md}
+              stroke={themeCssVariables.icon.stroke.sm}
             />
-          </StyledAvatarContainer>
-        )
+          </StyledMobileBackButton>
+          {isDefined(recordIdentifier) && (
+            <StyledAvatarContainer>
+              <Avatar
+                avatarUrl={getAbsoluteImageUrl(recordIdentifier.avatarUrl)}
+                placeholder={recordIdentifier.name}
+                placeholderColorSeed={objectRecordId}
+                size="md"
+                type={recordIdentifier.avatarType}
+              />
+            </StyledAvatarContainer>
+          )}
+        </>
       ) : (
         <StyledEditableTitlePrefix
           onClick={() => {

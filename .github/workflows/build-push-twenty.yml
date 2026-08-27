@@ -1,0 +1,101 @@
+# =============================================================================
+# build-push-twenty.yml — сборка образа Twenty из форка → GHCR → деплой на прод
+#
+# Два независимых джоба:
+#   build  — при push/merge в main: docker build (target twenty) → push
+#            ghcr.io/we2go/crm-twenty:main + :<sha>. БЕЗ деплоя.
+#   deploy — ТОЛЬКО вручную (workflow_dispatch), входной параметр image_tag.
+#            Пиннит TWENTY_TAG=<image_tag> в /srv/app/.env на сервере,
+#            делает фреш-бэкап (scripts/backup-twenty.sh), pull + up -d, healthz.
+#
+# Зачем разделение: push в main не должен молча деплоить прод. Деплой — явное
+# действие с пиннингом тега (по sha), что даёт точку отката (rollback = вернуть
+# старый TWENTY_TAG + при необходимости восстановить БД из бэкапа).
+# =============================================================================
+name: Build & Push Twenty image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Тег образа для деплоя (github.sha или main)'
+        required: false
+        default: 'main'
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: build-push-twenty
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: packages/twenty-docker/twenty/Dockerfile
+          target: twenty
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/we2go/crm-twenty:main
+            ghcr.io/we2go/crm-twenty:${{ github.sha }}
+          cache-from: type=registry,ref=ghcr.io/we2go/crm-twenty:cache
+          cache-to: type=registry,ref=ghcr.io/we2go/crm-twenty:cache,mode=max
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            echo "=== Twenty CRM deploy (manual, tag=${{ github.event.inputs.image_tag }}) $(date -u) ==="
+
+            # 1) Фреш-бэкап ПЕРЕД деплоем (БД + storage + .env)
+            sudo /srv/app/scripts/backup-twenty.sh || echo "WARN: backup failed, continuing"
+
+            # 2) Пиннинг тега образа в общем .env
+            cd /srv/app
+            TAG="${{ github.event.inputs.image_tag }}"
+            if grep -q '^TWENTY_TAG=' .env; then
+              sed -i "s|^TWENTY_TAG=.*|TWENTY_TAG=$TAG|" .env
+            else
+              echo "TWENTY_TAG=$TAG" >> .env
+            fi
+            grep '^TWENTY_TAG=' .env
+
+            # 3) Деплой
+            docker compose -f twenty/docker-compose.yml pull
+            docker compose -f twenty/docker-compose.yml up -d
+
+            sleep 15
+            docker compose -f twenty/docker-compose.yml ps twenty-server twenty-worker twenty-db twenty-redis
+            curl -sf https://crm.smokky.club/healthz || { echo "Health check FAILED"; exit 1; }
+            echo "=== Deploy complete ==="

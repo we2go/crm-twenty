@@ -9,7 +9,10 @@ import { NavigationDrawerCollapseButton } from '@/ui/navigation/navigation-drawe
 import { useIsMobile } from '@/ui/utilities/responsive/hooks/useIsMobile';
 import { styled } from '@linaria/react';
 import { type ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { isDefined } from 'twenty-shared/utils';
+import { IconArrowLeft } from 'twenty-ui/icon';
+import { LightIconButton } from 'twenty-ui/input';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
 type PageCardHeaderProps = {
@@ -91,9 +94,22 @@ export const PageCardHeader = ({
 }: PageCardHeaderProps) => {
   const isMobile = useIsMobile();
   const isNavigationDrawerExpanded = useNavigationDrawerExpanded();
+  const navigate = useNavigate();
 
   const hasTitleContent = isDefined(icon) || isDefined(title) || isDefined(tag);
   const shouldCenterTitle = centerTitle && hasTitleContent;
+
+  const previousHref =
+    isDefined(links) && links.length > 1
+      ? links[links.length - 2]?.href
+      : undefined;
+  const showBackButton = isMobile && isDefined(previousHref);
+
+  const handleBack = () => {
+    if (showBackButton && isDefined(previousHref)) {
+      navigate(previousHref);
+    }
+  };
 
   const titleContent = (
     <>
@@ -108,6 +124,15 @@ export const PageCardHeader = ({
       <StyledLeft>
         {!isMobile && !isNavigationDrawerExpanded && (
           <NavigationDrawerCollapseButton direction="right" />
+        )}
+        {showBackButton && (
+          <LightIconButton
+            Icon={IconArrowLeft}
+            size="small"
+            accent="tertiary"
+            onClick={handleBack}
+            aria-label="Back"
+          />
         )}
         {isDefined(breadcrumb)
           ? breadcrumb

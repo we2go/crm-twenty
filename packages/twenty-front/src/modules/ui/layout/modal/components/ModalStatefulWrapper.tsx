@@ -46,6 +46,9 @@ export const ModalStatefulWrapper = ({
 
   const { closeModal } = useModal();
 
+  // Mobile: allow closing the modal even if isClosable is false
+  const effectiveIsClosable = isMobile || isClosable;
+
   const handleClose = () => {
     onClose?.();
     if (shouldCloseModalOnClickOutsideOrEscape) {
@@ -67,7 +70,7 @@ export const ModalStatefulWrapper = ({
             modalInstanceId={modalInstanceId}
             modalRef={modalRef}
             onEnter={onEnter}
-            isClosable={isClosable}
+            isClosable={effectiveIsClosable}
             onClose={handleClose}
           />
         )}
